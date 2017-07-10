@@ -9,10 +9,22 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	
 	<artifactId>pinkyLam-service</artifactId>
 	<name>pinkyLam-service</name>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>com.pinkylam.blog</groupId>
+			<artifactId>pinkyLam-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+	</dependencies>
 
 </project>

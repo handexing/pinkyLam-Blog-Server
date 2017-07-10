@@ -12,12 +12,25 @@
 	</parent>
 
 	<artifactId>pinkyLam-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<name>pinkyLam-api</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.pinkylam.blog</groupId>
+			<artifactId>pinkyLam-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pinkylam.blog</groupId>
+			<artifactId>pinkyLam-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+	</dependencies>
 
 
 </project>
