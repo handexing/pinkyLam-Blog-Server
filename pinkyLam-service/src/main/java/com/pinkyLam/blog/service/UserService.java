@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserService extends JpaRepository<User, Long> {
 
+	public User findUserByNameAndPsw(String name, String psw);
+
 }
