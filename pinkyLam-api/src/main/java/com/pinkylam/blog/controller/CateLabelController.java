@@ -1,7 +1,7 @@
 package com.pinkylam.blog.controller;
 
+import com.pinkyLam.blog.dao.CateLabelDao;
 import com.pinkyLam.blog.entity.CateLabel;
-import com.pinkyLam.blog.service.CateLabelService;
 import com.pinkyLam.blog.vo.ErrorCode;
 import com.pinkyLam.blog.vo.ExecuteResult;
 
@@ -22,13 +22,13 @@ import java.util.List;
 public class CateLabelController {
 
 	@Autowired
-	CateLabelService cateLabelService;
+	CateLabelDao cateLabelDao;
 
 	@RequestMapping("getCateLabelList/{type}")
 	public ExecuteResult<List<CateLabel>> getCateLabelList(@PathVariable Integer type) {
 		ExecuteResult<List<CateLabel>> result = new ExecuteResult<>();
 		try {
-			List<CateLabel> list = cateLabelService.findCateLabelByType(type);
+			List<CateLabel> list = cateLabelDao.findCateLabelByType(type);
 			result.setData(list);
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -47,8 +47,8 @@ public class CateLabelController {
 			cateLabel.setName(name);
 			cateLabel.setRemark("");
 			cateLabel.setType(type);
-			cateLabel = cateLabelService.save(cateLabel);
-			List<CateLabel> list = cateLabelService.findCateLabelByType(type);
+			cateLabel = cateLabelDao.save(cateLabel);
+			List<CateLabel> list = cateLabelDao.findCateLabelByType(type);
 			result.setData(list);
 			result.setSuccess(true);
 		} catch (Exception e) {

@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.service;
+package com.pinkyLam.blog.dao;
 
 import com.pinkyLam.blog.entity.User;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UserService extends JpaRepository<User, Long> {
+public interface UserDao extends JpaRepository<User, Long> {
 
 	public User findUserByNameAndPsw(String name, String psw);
 

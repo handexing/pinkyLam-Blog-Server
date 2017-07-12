@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.service;
+package com.pinkyLam.blog.dao;
 
 import com.pinkyLam.blog.entity.CateLabel;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Repository
-public interface CateLabelService extends JpaRepository<CateLabel, Long> {
+public interface CateLabelDao extends JpaRepository<CateLabel, Long> {
 
 	public List<CateLabel> findCateLabelByType(Integer type);
 

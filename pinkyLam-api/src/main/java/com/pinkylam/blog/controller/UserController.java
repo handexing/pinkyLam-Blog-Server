@@ -1,7 +1,7 @@
 package com.pinkylam.blog.controller;
 
+import com.pinkyLam.blog.dao.UserDao;
 import com.pinkyLam.blog.entity.User;
-import com.pinkyLam.blog.service.UserService;
 import com.pinkyLam.blog.vo.ErrorCode;
 import com.pinkyLam.blog.vo.ExecuteResult;
 
@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	UserDao userDao;
 
 	@RequestMapping("login/{name}/{psw}")
 	public ExecuteResult<User> login(@PathVariable String name, @PathVariable String psw) {
 		ExecuteResult<User> result = new ExecuteResult<>();
-		User user = userService.findUserByNameAndPsw(name, psw);
+		User user = userDao.findUserByNameAndPsw(name, psw);
 		if (user != null) {
 			result.setData(user);
 			result.setSuccess(true);
