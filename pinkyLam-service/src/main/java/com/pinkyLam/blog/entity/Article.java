@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Pinky Lam 908716835@qq.com
@@ -26,6 +27,19 @@ public class Article implements Serializable {
 	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)
 	 */
 	private static final long serialVersionUID = 5918485060819084203L;
+
+	/**
+	 * 草稿
+	 */
+	public static final Integer ARTICLE_DRAFT = 1;
+	/**
+	 * 发布
+	 */
+	public static final Integer ARTICLE_PUBLISH = 2;
+	/**
+	 * 删除
+	 */
+	public static final Integer ARTICLE_DELETE = 3;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,6 +61,15 @@ public class Article implements Serializable {
 	@Column(name = "UPDATE_TIME")
 	@JsonSerialize(using = CustomDateSerializer.class)
 	private Date updateTime;
+
+	@Transient
+	private String tag;
+	@Transient
+	private Integer cateId;
+
+	public Integer getCateId() {
+		return cateId;
+	}
 
 	public String getContent() {
 		return content;
@@ -72,12 +95,20 @@ public class Article implements Serializable {
 		return subtitle;
 	}
 
+	public String getTag() {
+		return tag;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+
+	public void setCateId(Integer cateId) {
+		this.cateId = cateId;
 	}
 
 	public void setContent(String content) {
@@ -104,6 +135,10 @@ public class Article implements Serializable {
 		this.subtitle = subtitle;
 	}
 
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -116,7 +151,8 @@ public class Article implements Serializable {
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", subtitle=" + subtitle + ", content=" + content
 				+ ", status=" + status + ", hits=" + hits + ", createTime=" + createTime + ", updateTime=" + updateTime
-				+ "]";
+				+ ", tag=" + tag + ", cateId=" + cateId + "]";
 	}
+
 
 }

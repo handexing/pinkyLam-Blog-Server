@@ -15,6 +15,8 @@ import java.util.List;
 @Repository
 public interface CateLabelDao extends JpaRepository<CateLabel, Long> {
 
+	public CateLabel findCateLabelByNameAndType(String name, Integer type);
+
 	public List<CateLabel> findCateLabelByType(Integer type);
 
 }

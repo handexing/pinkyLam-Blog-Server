@@ -23,7 +23,13 @@ public class CateLabel implements Serializable {
 	 */
 	private static final long serialVersionUID = 4054187413973378444L;
 
+	/**
+	 * 类别
+	 */
 	public static final Integer CATEGORY_TYPE = 1;
+	/**
+	 * 标签
+	 */
 	public static final Integer LABEL_TYPE = 2;
 
 	@Id
