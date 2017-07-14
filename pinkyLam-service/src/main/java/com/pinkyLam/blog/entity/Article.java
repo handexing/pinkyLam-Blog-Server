@@ -55,6 +55,8 @@ public class Article implements Serializable {
 	private Integer status;
 	@Column(name = "HITS")
 	private Integer hits;
+	@Column(name = "AUTHOR_ID")
+	private Long authorId;
 	@Column(name = "CREATE_TIME")
 	@JsonSerialize(using = CustomDateSerializer.class)
 	private Date createTime;
@@ -65,9 +67,13 @@ public class Article implements Serializable {
 	@Transient
 	private String tag;
 	@Transient
-	private Integer cateId;
+	private Long cateId;
 
-	public Integer getCateId() {
+	public Long getAuthorId() {
+		return authorId;
+	}
+
+	public Long getCateId() {
 		return cateId;
 	}
 
@@ -107,7 +113,11 @@ public class Article implements Serializable {
 		return updateTime;
 	}
 
-	public void setCateId(Integer cateId) {
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
+	}
+
+	public void setCateId(Long cateId) {
 		this.cateId = cateId;
 	}
 

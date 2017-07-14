@@ -42,6 +42,7 @@ public class CateLabel implements Serializable {
 	private Integer type;
 	@Column(name = "REMARK")
 	private String remark;
+
 	public Long getId() {
 		return id;
 	}

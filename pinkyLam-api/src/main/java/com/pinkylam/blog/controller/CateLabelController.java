@@ -1,6 +1,8 @@
 package com.pinkylam.blog.controller;
 
+import com.pinkyLam.blog.dao.ArticleCateLabelDao;
 import com.pinkyLam.blog.dao.CateLabelDao;
+import com.pinkyLam.blog.entity.ArticleCateLabel;
 import com.pinkyLam.blog.entity.CateLabel;
 import com.pinkyLam.blog.service.CateLabelService;
 import com.pinkyLam.blog.vo.ErrorCode;
@@ -30,6 +32,31 @@ public class CateLabelController {
 	CateLabelDao cateLabelDao;
 	@Autowired
 	CateLabelService cateLabelService;
+	@Autowired
+	ArticleCateLabelDao articleCateLabelDao;
+
+	@RequestMapping("delCateLabel/{id}")
+	public ExecuteResult<Integer> delCateLabel(@PathVariable Long id) {
+		ExecuteResult<Integer> result = new ExecuteResult<>();
+		try {
+			ArticleCateLabel articleCateLabel = articleCateLabelDao.findArticleCateLabelByCateLabelId(id);
+			if (articleCateLabel != null) {
+				result.setData(-1);
+				result.setSuccess(false);
+			} else {
+				result.setData(1);
+				cateLabelDao.delete(id);
+				result.setSuccess(true);
+			}
+		} catch (Exception e) {
+			logger.error("", e);
+			result.setData(0);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 
 	@RequestMapping("getCateLabelList/{type}")
 	public ExecuteResult<List<CateLabel>> getCateLabelList(@PathVariable Integer type) {
