@@ -15,5 +15,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArticleDao extends JpaRepository<Article, Long> {
 
-	Page<Article> findArticleById(Long id, Pageable pageable);
+	Page<Article> findArticleByAuthorId(Long authorId, Pageable pageable);
+
+	Page<Article> findArticleByAuthorIdAndTitleLike(Long id, String title, Pageable pageable);
 }

@@ -9,7 +9,7 @@ public class DateTableJson implements Serializable {
 	 */
 	private static final long serialVersionUID = 5544244021994468020L;
 
-	public static final int PAGE_SIZE = 10;
+	public static final int PAGE_SIZE = 7;
 
 	private long totalPageNumber;
 	private int pageSize;

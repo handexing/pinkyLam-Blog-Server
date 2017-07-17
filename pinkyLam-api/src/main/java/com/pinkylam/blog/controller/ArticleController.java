@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,14 +38,37 @@ public class ArticleController {
 	ArticleDao articleDao;
 
 	@RequestMapping("articleList")
-	public DateTableJson articleList(@RequestParam(value = "page", defaultValue = "0") Integer page, Long id) {
+	public DateTableJson articleList(@RequestParam(value = "page") Integer page, Long id, String title) {
 		DateTableJson tableJson = new DateTableJson();
 		Sort sort = new Sort(Direction.DESC, "id");
 		Pageable pageable = new PageRequest(page, DateTableJson.PAGE_SIZE, sort);
-		Page<Article> pageData = articleDao.findArticleById(id, pageable);
+		Page<Article> pageData = null;
+		if (StringUtils.isEmpty(title)) {
+			pageData = articleDao.findArticleByAuthorId(id, pageable);
+		} else {
+			pageData = articleDao.findArticleByAuthorIdAndTitleLike(id, title, pageable);
+		}
+
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(DateTableJson.PAGE_SIZE);
+		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
+	}
+
+	@RequestMapping("getArticle")
+	public ExecuteResult<Article> getArticle(Long id) {
+		final ExecuteResult<Article> result = new ExecuteResult<>();
+		try {
+			Article article = articleDao.findOne(id);
+			result.setData(article);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
 	}
 
 	@RequestMapping("saveArticle")
