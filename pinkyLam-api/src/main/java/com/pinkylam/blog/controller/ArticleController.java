@@ -1,7 +1,9 @@
 package com.pinkylam.blog.controller;
 
 import com.pinkyLam.blog.dao.ArticleDao;
+import com.pinkyLam.blog.dao.CateLabelDao;
 import com.pinkyLam.blog.entity.Article;
+import com.pinkyLam.blog.entity.CateLabel;
 import com.pinkyLam.blog.service.ArticleService;
 import com.pinkyLam.blog.vo.DateTableJson;
 import com.pinkyLam.blog.vo.ErrorCode;
@@ -16,10 +18,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author Pinky Lam 908716835@qq.com
@@ -36,6 +41,8 @@ public class ArticleController {
 	ArticleService articleService;
 	@Autowired
 	ArticleDao articleDao;
+	@Autowired
+	CateLabelDao cateLabelDao;
 
 	@RequestMapping("articleList")
 	public DateTableJson articleList(@RequestParam(value = "page") Integer page, Long id, String title) {
@@ -55,11 +62,28 @@ public class ArticleController {
 		return tableJson;
 	}
 
+	@RequestMapping("delArticle/{id}")
+	public ExecuteResult<Boolean> delArticle(@PathVariable Long id) {
+		ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			articleDao.delete(id);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+
 	@RequestMapping("getArticle")
 	public ExecuteResult<Article> getArticle(Long id) {
 		final ExecuteResult<Article> result = new ExecuteResult<>();
 		try {
 			Article article = articleDao.findOne(id);
+			List<CateLabel> cateLableList = cateLabelDao.findCateLabelByArticleId(id);
+			article.setLabels(cateLableList);
 			result.setData(article);
 			result.setSuccess(true);
 		} catch (final Exception e) {

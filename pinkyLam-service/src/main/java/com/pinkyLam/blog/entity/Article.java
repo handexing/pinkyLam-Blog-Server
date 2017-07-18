@@ -5,6 +5,7 @@ import com.pinkyLam.blog.utils.CustomDateSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -68,6 +69,8 @@ public class Article implements Serializable {
 	private String tag;
 	@Transient
 	private Long cateId;
+	@Transient
+	private List<CateLabel> labels;
 
 	public Long getAuthorId() {
 		return authorId;
@@ -91,6 +94,10 @@ public class Article implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public List<CateLabel> getLabels() {
+		return labels;
 	}
 
 	public Integer getStatus() {
@@ -135,6 +142,10 @@ public class Article implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public void setLabels(List<CateLabel> labels) {
+		this.labels = labels;
 	}
 
 	public void setStatus(Integer status) {
