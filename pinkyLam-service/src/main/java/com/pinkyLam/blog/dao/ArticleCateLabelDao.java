@@ -23,6 +23,11 @@ public interface ArticleCateLabelDao extends JpaRepository<ArticleCateLabel, Lon
 
 	@Modifying(clearAutomatically = true)
 	@Transactional
+	@Query(nativeQuery = true, value = "DELETE FROM ARTICLE_CATE_LABEL WHERE ARTICLE_ID=:articleId")
+	int deleteArticleCateLabel(@Param("articleId") Long articleId);
+
+	@Modifying(clearAutomatically = true)
+	@Transactional
 	@Query(nativeQuery = true, value = "DELETE FROM ARTICLE_CATE_LABEL WHERE ARTICLE_ID=:articleId AND CATE_LABEL_ID NOT IN:cateLabelId")
 	int deleteArticleCateLabel(@Param("articleId") Long articleId, @Param("cateLabelId") List<Long> cateLabelIds);
 

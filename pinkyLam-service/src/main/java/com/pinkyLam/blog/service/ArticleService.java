@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,34 +46,23 @@ public class ArticleService {
 			String[] tags = article.getTag().split(",");
 
 			List<CateLabel> cateLabels = cateLabelDao.findCateLabelByArticleId(article.getId());
-			List<Long> cateLabelIds = new ArrayList<>();
+			articleCateLabelDao.deleteArticleCateLabel(article.getId());// 删除文章标签关系
 
 			for (CateLabel cateLabel : cateLabels) {
 				if (cateLabel.getType() == CateLabel.LABEL_TYPE) {
 					for (String tag : tags) {
-						if (!cateLabel.getName().equals(tag)) {
-							// 验证是否存在
-							CateLabel label = cateLabelDao.findCateLabelByArticleIdAndTypeAndTypeName(article.getId(),
-									CateLabel.LABEL_TYPE, tag);
-							if (label == null) {
-								label = cateLabelDao.findCateLabelByNameAndType(tag, CateLabel.LABEL_TYPE);
-								if (label != null) {
-									saveArticleCateLabel(article, label);
-								} else {
-									label = new CateLabel(tag, CateLabel.LABEL_TYPE);
-									label = cateLabelDao.save(label);
-									saveArticleCateLabel(article, label);
-								}
-							}
+						CateLabel label = cateLabelDao.findCateLabelByNameAndType(tag, CateLabel.LABEL_TYPE);
+						if (label != null) {
+							saveArticleCateLabel(article, label);
 						} else {
-							cateLabelIds.add(cateLabel.getId());
+							label = new CateLabel(tag, CateLabel.LABEL_TYPE);
+							label = cateLabelDao.save(label);
+							saveArticleCateLabel(article, label);
 						}
 					}
 				}
 			}
-
 			article = articleDao.save(art);
-			articleCateLabelDao.deleteArticleCateLabel(article.getId(), cateLabelIds);
 		} else {
 			article.setCreateTime(new Date());
 			article.setStatus(Article.ARTICLE_DRAFT);
@@ -103,7 +91,6 @@ public class ArticleService {
 		}
 
 	}
-
 
 	/**
 	 * @Title: saveArticleCateLabel
