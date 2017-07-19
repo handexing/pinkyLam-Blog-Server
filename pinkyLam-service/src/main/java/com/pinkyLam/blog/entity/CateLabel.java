@@ -43,6 +43,17 @@ public class CateLabel implements Serializable {
 	@Column(name = "REMARK")
 	private String remark;
 
+	public CateLabel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CateLabel(String name, Integer type) {
+		super();
+		this.name = name;
+		this.type = type;
+	}
+
 	public Long getId() {
 		return id;
 	}

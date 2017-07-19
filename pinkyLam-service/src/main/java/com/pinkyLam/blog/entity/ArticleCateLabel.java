@@ -33,6 +33,17 @@ public class ArticleCateLabel implements Serializable {
 	@Column(name = "CATE_LABEL_ID")
 	private Long cateLabelId;
 
+	public ArticleCateLabel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ArticleCateLabel(Long articleId, Long cateLabelId) {
+		super();
+		this.articleId = articleId;
+		this.cateLabelId = cateLabelId;
+	}
+
 	public Long getArticleId() {
 		return articleId;
 	}
