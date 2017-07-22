@@ -6,10 +6,16 @@ import com.pinkyLam.blog.utils.DateUtil;
 import com.pinkyLam.blog.utils.FileUtil;
 import com.pinkyLam.blog.vo.ErrorCode;
 import com.pinkyLam.blog.vo.ExecuteResult;
+import com.pinkyLam.blog.vo.PageableResultJson;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +44,18 @@ public class FileController {
 	@Autowired
 	AttachDao attachDao;
 
+	@RequestMapping("attachList")
+	public PageableResultJson attachList(@RequestParam(value = "page") Integer page, Long userId) {
+		PageableResultJson tableJson = new PageableResultJson();
+		Sort sort = new Sort(Direction.DESC, "id");
+		Pageable pageable = new PageRequest(page, 12, sort);
+		Page<Attach> pageData = attachDao.findAttachByAuthorId(userId, pageable);
+		tableJson.setData(pageData.getContent());
+		tableJson.setPageSize(12);
+		tableJson.setTotalPageNumber(pageData.getTotalPages());
+		return tableJson;
+	}
+
 	@RequestMapping("upload/{id}")
 	public ExecuteResult<Boolean> upload(@RequestParam("file") MultipartFile[] multipartFiles, @PathVariable Long id)
 			throws IOException {
@@ -54,12 +72,6 @@ public class FileController {
 				String type = FileUtil.isImage(file.getInputStream()) ? Attach.UPLOAD_TYPE_IMAGE
 						: Attach.UPLOAD_TYPE_FILE;
 				File tempFile = new File(basePath + realPath);
-				if (!tempFile.getParentFile().exists()) {
-					tempFile.mkdirs();
-				}
-				if (!tempFile.exists()) {
-					tempFile.createNewFile();
-				}
 				FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(tempFile));
 				Attach attach = new Attach(id, fileName, type, realPath, new Date());
 				attachDao.save(attach);

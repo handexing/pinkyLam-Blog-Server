@@ -2,7 +2,7 @@ package com.pinkyLam.blog.vo;
 
 import java.io.Serializable;
 
-public class DateTableJson implements Serializable {
+public class PageableResultJson implements Serializable {
 
 	/**
 	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)

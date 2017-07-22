@@ -5,7 +5,7 @@ import com.pinkyLam.blog.dao.CateLabelDao;
 import com.pinkyLam.blog.entity.Article;
 import com.pinkyLam.blog.entity.CateLabel;
 import com.pinkyLam.blog.service.ArticleService;
-import com.pinkyLam.blog.vo.DateTableJson;
+import com.pinkyLam.blog.vo.PageableResultJson;
 import com.pinkyLam.blog.vo.ErrorCode;
 import com.pinkyLam.blog.vo.ExecuteResult;
 
@@ -45,10 +45,10 @@ public class ArticleController {
 	CateLabelDao cateLabelDao;
 
 	@RequestMapping("articleList")
-	public DateTableJson articleList(@RequestParam(value = "page") Integer page, Long id, String title) {
-		DateTableJson tableJson = new DateTableJson();
+	public PageableResultJson articleList(@RequestParam(value = "page") Integer page, Long id, String title) {
+		PageableResultJson tableJson = new PageableResultJson();
 		Sort sort = new Sort(Direction.DESC, "id");
-		Pageable pageable = new PageRequest(page, DateTableJson.PAGE_SIZE, sort);
+		Pageable pageable = new PageRequest(page, PageableResultJson.PAGE_SIZE, sort);
 		Page<Article> pageData = null;
 		if (StringUtils.isEmpty(title)) {
 			pageData = articleDao.findArticleByAuthorId(id, pageable);
@@ -57,7 +57,7 @@ public class ArticleController {
 		}
 
 		tableJson.setData(pageData.getContent());
-		tableJson.setPageSize(DateTableJson.PAGE_SIZE);
+		tableJson.setPageSize(PageableResultJson.PAGE_SIZE);
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
 	}
