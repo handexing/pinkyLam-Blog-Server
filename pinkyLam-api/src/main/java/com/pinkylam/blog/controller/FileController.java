@@ -2,6 +2,7 @@ package com.pinkylam.blog.controller;
 
 import com.pinkyLam.blog.dao.AttachDao;
 import com.pinkyLam.blog.entity.Attach;
+import com.pinkyLam.blog.utils.Constants;
 import com.pinkyLam.blog.utils.DateUtil;
 import com.pinkyLam.blog.utils.FileUtil;
 import com.pinkyLam.blog.vo.ErrorCode;
@@ -66,6 +67,10 @@ public class FileController {
 		try {
 			for (MultipartFile file : multipartFiles) {
 				String fileName = file.getOriginalFilename();
+				if (file.getSize() > Constants.MAX_FILE_SIZE) {
+					result.setSuccess(false);
+					return result;
+				}
 				String dateStr = DateUtil.getDateFormatStr(new Date(), "yyyyMMdd");
 				String realPath = filePath + dateStr + "/" + new Date().getTime()
 						+ fileName.substring(fileName.lastIndexOf("."));
