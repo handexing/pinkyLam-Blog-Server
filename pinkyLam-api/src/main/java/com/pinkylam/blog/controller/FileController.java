@@ -12,6 +12,7 @@ import com.pinkyLam.blog.vo.PageableResultJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,9 @@ public class FileController {
 	@Autowired
 	AttachDao attachDao;
 
+	@Value("${upload.path}")
+	String upload_dir;
+
 	@RequestMapping("attachList")
 	public PageableResultJson attachList(@RequestParam(value = "page") Integer page, Long userId) {
 		PageableResultJson tableJson = new PageableResultJson();
@@ -62,8 +66,7 @@ public class FileController {
 			throws IOException {
 
 		final ExecuteResult<Boolean> result = new ExecuteResult<>();
-		final String basePath = FileUtil.getUplodFilePath();
-
+		
 		try {
 			for (MultipartFile file : multipartFiles) {
 				String fileName = file.getOriginalFilename();
@@ -76,7 +79,10 @@ public class FileController {
 						+ fileName.substring(fileName.lastIndexOf("."));
 				String type = FileUtil.isImage(file.getInputStream()) ? Attach.UPLOAD_TYPE_IMAGE
 						: Attach.UPLOAD_TYPE_FILE;
-				File tempFile = new File(basePath + realPath);
+				File tempFile = new File(upload_dir + realPath);
+				if (!tempFile.getParentFile().exists()) {
+					tempFile.mkdirs();
+				}
 				FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(tempFile));
 				Attach attach = new Attach(id, fileName, type, realPath, new Date());
 				attachDao.save(attach);
