@@ -61,6 +61,21 @@ public class FileController {
 		return tableJson;
 	}
 
+	@RequestMapping("deleteFile/{id}")
+	public ExecuteResult<Boolean> delArticle(@PathVariable Long id) {
+		ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			attachDao.delete(id);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+
 	@RequestMapping("upload/{id}")
 	public ExecuteResult<Boolean> upload(@RequestParam("file") MultipartFile[] multipartFiles, @PathVariable Long id)
 			throws IOException {
