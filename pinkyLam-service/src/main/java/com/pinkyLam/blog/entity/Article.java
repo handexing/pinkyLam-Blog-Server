@@ -58,6 +58,8 @@ public class Article implements Serializable {
 	private Integer hits;
 	@Column(name = "AUTHOR_ID")
 	private Long authorId;
+	@Column(name = "WRITING_TIME")
+	private Integer writingTime;
 	@Column(name = "CREATE_TIME")
 	@JsonSerialize(using = CustomDateSerializer.class)
 	private Date createTime;
@@ -120,6 +122,10 @@ public class Article implements Serializable {
 		return updateTime;
 	}
 
+	public Integer getWritingTime() {
+		return writingTime;
+	}
+
 	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
 	}
@@ -166,6 +172,10 @@ public class Article implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public void setWritingTime(Integer writingTime) {
+		this.writingTime = writingTime;
 	}
 
 	@Override

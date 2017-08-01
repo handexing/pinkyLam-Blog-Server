@@ -5,6 +5,8 @@ import com.pinkyLam.blog.entity.Attach;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,4 +19,6 @@ public interface AttachDao extends JpaRepository<Attach, Long> {
 
 	Page<Attach> findAttachByAuthorId(Long authorId, Pageable pageable);
 
+	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM ATTACH WHERE AUTHOR_ID=:userId")
+	public int getAttachByAuthorIdCnt(@Param("userId") Long userId);
 }

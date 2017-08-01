@@ -42,6 +42,7 @@ public class ArticleService {
 			art.setSubtitle(article.getSubtitle());
 			art.setTitle(article.getTitle());
 			art.setUpdateTime(new Date());
+			art.setWritingTime(art.getWritingTime() + article.getWritingTime());
 
 			String[] tags = article.getTag().split(",");
 
