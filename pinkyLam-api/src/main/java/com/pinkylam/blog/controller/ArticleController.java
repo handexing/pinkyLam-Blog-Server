@@ -5,9 +5,9 @@ import com.pinkyLam.blog.dao.CateLabelDao;
 import com.pinkyLam.blog.entity.Article;
 import com.pinkyLam.blog.entity.CateLabel;
 import com.pinkyLam.blog.service.ArticleService;
-import com.pinkyLam.blog.vo.PageableResultJson;
 import com.pinkyLam.blog.vo.ErrorCode;
 import com.pinkyLam.blog.vo.ExecuteResult;
+import com.pinkyLam.blog.vo.PageableResultJson;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,6 +85,22 @@ public class ArticleController {
 			List<CateLabel> cateLableList = cateLabelDao.findCateLabelByArticleId(id);
 			article.setLabels(cateLableList);
 			result.setData(article);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+
+	@RequestMapping("getLatelyArticleList/{userId}")
+	public ExecuteResult<List<Article>> getLatelyArticleList(@PathVariable Long userId) {
+		final ExecuteResult<List<Article>> result = new ExecuteResult<>();
+		try {
+			List<Article> list = articleDao.getLatelyArticleList(userId);
+			result.setData(list);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);
