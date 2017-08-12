@@ -7,6 +7,8 @@
 - mysql
 - maven
 
+## PinkyLam-blog 使用教程
+[使用教程](https://github.com/handexing/pinkyLam-Blog-Server/raw/master/doc/)
 
 ## 项目日志
 - 初始化项目（*2017-07-10*）
