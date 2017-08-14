@@ -16,4 +16,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/upload/**").addResourceLocations("classpath:/upload/");
 		super.addResourceHandlers(registry);
 	}
+
 }

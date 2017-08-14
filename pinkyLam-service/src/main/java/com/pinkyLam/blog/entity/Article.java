@@ -1,7 +1,4 @@
-package com.pinkyLam.blog.entity;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pinkyLam.blog.utils.CustomDateSerializer;
+package com.pinkylam.blog.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.pinkylam.blog.utils.CustomDateSerializer;
 
 /**
  * @author Pinky Lam 908716835@qq.com

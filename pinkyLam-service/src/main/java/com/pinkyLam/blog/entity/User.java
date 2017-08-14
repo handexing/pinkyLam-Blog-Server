@@ -1,7 +1,7 @@
-package com.pinkyLam.blog.entity;
+package com.pinkylam.blog.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pinkyLam.blog.utils.CustomDateSerializer;
+import com.pinkylam.blog.utils.CustomDateSerializer;
 
 import java.io.Serializable;
 import java.util.Date;

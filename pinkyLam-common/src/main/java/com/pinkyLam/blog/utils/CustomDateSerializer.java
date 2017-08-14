@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.utils;
+package com.pinkylam.blog.utils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;

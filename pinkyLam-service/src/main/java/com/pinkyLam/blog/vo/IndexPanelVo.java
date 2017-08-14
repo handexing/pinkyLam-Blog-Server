@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.vo;
+package com.pinkylam.blog.vo;
 
 /**
  * @author Pinky Lam 908716835@qq.com

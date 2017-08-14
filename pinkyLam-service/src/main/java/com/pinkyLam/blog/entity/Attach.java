@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.entity;
+package com.pinkylam.blog.entity;
 
 import java.io.Serializable;
 import java.util.Date;

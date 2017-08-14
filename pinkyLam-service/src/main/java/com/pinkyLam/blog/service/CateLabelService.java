@@ -1,12 +1,12 @@
-package com.pinkyLam.blog.service;
-
-import com.pinkyLam.blog.dao.CateLabelDao;
-import com.pinkyLam.blog.entity.CateLabel;
+package com.pinkylam.blog.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.pinkylam.blog.dao.CateLabelDao;
+import com.pinkylam.blog.entity.CateLabel;
 
 /**
  * @author Pinky Lam 908716835@qq.com

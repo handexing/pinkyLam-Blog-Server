@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.vo;
+package com.pinkylam.blog.vo;
 
 import java.util.Date;
 

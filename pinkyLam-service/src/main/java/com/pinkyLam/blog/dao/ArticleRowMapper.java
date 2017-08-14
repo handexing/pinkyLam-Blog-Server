@@ -1,11 +1,11 @@
-package com.pinkyLam.blog.dao;
-
-import com.pinkyLam.blog.entity.Article;
-
-import org.springframework.jdbc.core.RowMapper;
+package com.pinkylam.blog.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import com.pinkylam.blog.entity.Article;
 
 public class ArticleRowMapper implements RowMapper<Article> {
 

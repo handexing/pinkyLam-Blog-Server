@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.utils;
+package com.pinkylam.blog.utils;
 
 public class Constants {
 

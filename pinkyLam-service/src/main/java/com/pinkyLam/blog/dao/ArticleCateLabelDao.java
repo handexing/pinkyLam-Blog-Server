@@ -1,6 +1,8 @@
-package com.pinkyLam.blog.dao;
+package com.pinkylam.blog.dao;
 
-import com.pinkyLam.blog.entity.ArticleCateLabel;
+import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -8,9 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
+import com.pinkylam.blog.entity.ArticleCateLabel;
 
 /**
  * @author Pinky Lam 908716835@qq.com

@@ -7,18 +7,24 @@
 	<parent>
 		<groupId>com.pinkylam.blog</groupId>
 		<artifactId>pinkyLam-Blog-Server</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>pinkyLam-api</artifactId>
 	<name>pinkyLam-api</name>
+	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>com.pinkylam.blog</groupId>
 			<artifactId>pinkyLam-common</artifactId>
@@ -29,8 +35,32 @@
 			<artifactId>pinkyLam-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
+		
+		<dependency>
+         	<groupId>org.springframework.boot</groupId>
+         	<artifactId>spring-boot-starter-thymeleaf</artifactId>
+     	</dependency>
+     	
 	</dependencies>
-
-
+	
+	<build>
+		<plugins>
+        	<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.pinkylam.blog.Application</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+	
 </project>

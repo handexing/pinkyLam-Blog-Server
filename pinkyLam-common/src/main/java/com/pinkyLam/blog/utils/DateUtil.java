@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.utils;
+package com.pinkylam.blog.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

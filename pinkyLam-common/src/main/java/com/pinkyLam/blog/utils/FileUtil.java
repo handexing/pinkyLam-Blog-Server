@@ -1,4 +1,4 @@
-package com.pinkyLam.blog.utils;
+package com.pinkylam.blog.utils;
 
 import java.awt.Image;
 import java.io.File;

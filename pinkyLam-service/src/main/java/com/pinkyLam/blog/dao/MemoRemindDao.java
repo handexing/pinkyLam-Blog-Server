@@ -1,11 +1,12 @@
-package com.pinkyLam.blog.dao;
+package com.pinkylam.blog.dao;
 
-import com.pinkyLam.blog.entity.MemoRemind;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.pinkylam.blog.entity.MemoRemind;
+
 
 /**
  * @author Pinky Lam 908716835@qq.com
