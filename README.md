@@ -6,6 +6,7 @@
 - jpa
 - mysql
 - maven
+- nginx
 
 ## PinkyLam-blog 使用教程
 [使用教程](https://github.com/handexing/pinkyLam-Blog-Server/raw/master/doc/)
@@ -24,6 +25,7 @@
 - 修改首页面板，获取真实数据：文章数量、附件个数、写作用时（*2017-08-01*）
 - 首页面板近期文章接口开发，去除redis（*2017-08-04*）
 - 添加日历提醒功能（*2017-08-07*）
+- 修改上上附件功能，增加nginx做附件服务器，开发日历提醒的列表展示（*2017-08-15*）
 
 ## PC端项目
 

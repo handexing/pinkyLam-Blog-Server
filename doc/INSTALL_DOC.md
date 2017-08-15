@@ -18,6 +18,13 @@
 - 上传到服务器。然后只需要**java -jar your.jar**就可以启动项目了。访问*http:xx.xx.xx.xx:8888*测试服务是否已启动。
 - 查看服务是否启动成功 `http://xx.xx.xx.xx:8888/server/blog`
 
+### 安装配置nginx
+
+- 下载[nginx](http://nginx.org/)*自行百度怎么安装*
+- 配置nginx，路径`conf/nginx.conf`，把`nginx/conf/nginx.conf`覆盖掉。
+- **注意：conf/nginx.conf**`45` `49`行需要修改成自己服务器附件存放的地址。
+- 启动nginx，访问`127.0.0.1`查看是否启动成功。
+
 ## PC端
 
 - 将[PC端](https://github.com/handexing/PinkyLam-blog)代码clone到本地。

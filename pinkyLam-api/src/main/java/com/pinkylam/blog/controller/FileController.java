@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pinkylam.blog.dao.AttachDao;
 import com.pinkylam.blog.entity.Attach;
 import com.pinkylam.blog.utils.Constants;
-import com.pinkylam.blog.utils.DateUtil;
 import com.pinkylam.blog.utils.FileUtil;
 import com.pinkylam.blog.vo.ErrorCode;
 import com.pinkylam.blog.vo.ExecuteResult;
@@ -41,8 +40,6 @@ import com.pinkylam.blog.vo.PageableResultJson;
 public class FileController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	private final String filePath = "upload/";
 
 	@Autowired
 	AttachDao attachDao;
@@ -90,9 +87,8 @@ public class FileController {
 					result.setSuccess(false);
 					return result;
 				}
-				String dateStr = DateUtil.getDateFormatStr(new Date(), "yyyyMMdd");
-				String realPath = filePath + dateStr + "/" + new Date().getTime()
-						+ fileName.substring(fileName.lastIndexOf("."));
+
+				String realPath = new Date().getTime() + fileName.substring(fileName.lastIndexOf("."));
 				String type = FileUtil.isImage(file.getInputStream()) ? Attach.UPLOAD_TYPE_IMAGE
 						: Attach.UPLOAD_TYPE_FILE;
 				File tempFile = new File(upload_dir + realPath);
