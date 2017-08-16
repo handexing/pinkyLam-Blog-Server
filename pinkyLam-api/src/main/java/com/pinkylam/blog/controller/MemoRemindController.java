@@ -33,7 +33,7 @@ public class MemoRemindController {
 	public ExecuteResult<List<MemoRemind>> getMemoRemindList(@PathVariable Long authorId) {
 		final ExecuteResult<List<MemoRemind>> result = new ExecuteResult<>();
 		try {
-			List<MemoRemind> list = memoRemindDao.findMemoRemindByAuthorId(authorId);
+			List<MemoRemind> list = memoRemindDao.findMemoRemindByAuthorIdAndStatus(authorId,MemoRemind.MEMOREMIND_DEFAULT_STATUS);
 			result.setData(list);
 			result.setSuccess(true);
 		} catch (final Exception e) {
@@ -51,6 +51,23 @@ public class MemoRemindController {
 		try {
 			memoRemind.setCreateTime(new Date());
 			memoRemindDao.save(memoRemind);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping("closeRemind/{id}/{authorId}")
+	public ExecuteResult<List<MemoRemind>> closeRemind(@PathVariable Long id,@PathVariable Long authorId) {
+		final ExecuteResult<List<MemoRemind>> result = new ExecuteResult<>();
+		try {
+			memoRemindDao.updateStatus(id,MemoRemind.MEMOREMIND_CLOSE_STATUS);
+			List<MemoRemind> list = memoRemindDao.findMemoRemindByAuthorIdAndStatus(authorId,MemoRemind.MEMOREMIND_DEFAULT_STATUS);
+			result.setData(list);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);

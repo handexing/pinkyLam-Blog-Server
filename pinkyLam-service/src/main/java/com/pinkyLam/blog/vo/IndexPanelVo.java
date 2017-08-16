@@ -16,9 +16,9 @@ public class IndexPanelVo {
 	 */
 	public Integer attachCnt;
 	/**
-	 * 评论数量
+	 * 备忘录数量
 	 */
-	public Integer commentCnt;
+	public Integer remindCnt;
 	/**
 	 * 写作时间
 	 */
@@ -32,9 +32,6 @@ public class IndexPanelVo {
 		return attachCnt;
 	}
 
-	public Integer getCommentCnt() {
-		return commentCnt;
-	}
 
 	public Integer getWritingTime() {
 		return writingTime;
@@ -48,19 +45,25 @@ public class IndexPanelVo {
 		this.attachCnt = attachCnt;
 	}
 
-	public void setCommentCnt(Integer commentCnt) {
-		this.commentCnt = commentCnt;
-	}
 
 	public void setWritingTime(Integer writingTime) {
 		this.writingTime = writingTime;
 	}
 
+	public Integer getRemindCnt() {
+		return remindCnt;
+	}
+
+	public void setRemindCnt(Integer remindCnt) {
+		this.remindCnt = remindCnt;
+	}
+
 	@Override
 	public String toString() {
-		return "IndexPanelVo [articleCnt=" + articleCnt + ", attachCnt=" + attachCnt + ", commentCnt=" + commentCnt
+		return "IndexPanelVo [articleCnt=" + articleCnt + ", attachCnt=" + attachCnt + ", remindCnt=" + remindCnt
 				+ ", writingTime=" + writingTime + "]";
 	}
+
 
 
 

@@ -22,6 +22,15 @@ public class MemoRemind implements Serializable {
 	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)
 	 */
 	private static final long serialVersionUID = -7213787022886568071L;
+	
+	/**
+	 * 默认
+	 */
+	public static final Integer MEMOREMIND_DEFAULT_STATUS = 0;
+	/**
+	 * 关闭
+	 */
+	public static final Integer MEMOREMIND_CLOSE_STATUS = 0;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +44,8 @@ public class MemoRemind implements Serializable {
 	private String remindTime;
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
+	@Column(name = "STATUS")
+	private Integer status;
 
 	public MemoRemind() {
 		super();
@@ -88,6 +99,14 @@ public class MemoRemind implements Serializable {
 
 	public void setRemindTime(String remindTime) {
 		this.remindTime = remindTime;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	@Override

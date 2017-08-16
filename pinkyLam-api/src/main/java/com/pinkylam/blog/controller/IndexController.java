@@ -2,6 +2,7 @@ package com.pinkylam.blog.controller;
 
 import com.pinkylam.blog.dao.ArticleDao;
 import com.pinkylam.blog.dao.AttachDao;
+import com.pinkylam.blog.dao.MemoRemindDao;
 import com.pinkylam.blog.vo.ErrorCode;
 import com.pinkylam.blog.vo.ExecuteResult;
 import com.pinkylam.blog.vo.IndexPanelVo;
@@ -27,6 +28,8 @@ public class IndexController {
 	ArticleDao articleDao;
 	@Autowired
 	AttachDao attachDao;
+	@Autowired
+	MemoRemindDao memoRemindDao;
 
 	@RequestMapping("getMySelfInfo/{userId}")
 	public ExecuteResult<IndexPanelVo> delArticle(@PathVariable Long userId) {
@@ -36,11 +39,11 @@ public class IndexController {
 			int articleCnt = articleDao.getArticleByAuthorIdCnt(userId);
 			int writingTime = articleDao.getWritingTimeByAuthorIdCnt(userId);
 			int attachCnt = attachDao.getAttachByAuthorIdCnt(userId);
+			int remindCnt = memoRemindDao.getMemoRemindByAuthorIdCnt(userId);
 			panelVo.setArticleCnt(articleCnt);
 			panelVo.setAttachCnt(attachCnt);
 			panelVo.setWritingTime(writingTime);
-			// TODO 表还没设计
-			panelVo.setCommentCnt(0);
+			panelVo.setRemindCnt(remindCnt);
 			result.setData(panelVo);
 			result.setSuccess(true);
 		} catch (Exception e) {
