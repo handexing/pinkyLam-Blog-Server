@@ -30,7 +30,7 @@ public class MemoRemind implements Serializable {
 	/**
 	 * 关闭
 	 */
-	public static final Integer MEMOREMIND_CLOSE_STATUS = 0;
+	public static final Integer MEMOREMIND_CLOSE_STATUS = 1;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
